@@ -2,6 +2,7 @@
 
 namespace Z3d0X\FilamentFabricator\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -10,6 +11,8 @@ use Z3d0X\FilamentFabricator\Models\Contracts\Page as Contract;
 
 class Page extends Model implements Contract
 {
+    use HasUuids;
+
     public function __construct(array $attributes = [])
     {
         if (blank($this->table)) {
@@ -29,7 +32,7 @@ class Page extends Model implements Contract
 
     protected $casts = [
         'blocks' => 'array',
-        'parent_id' => 'integer',
+        'parent_id' => 'string',
     ];
 
     protected static function booted()

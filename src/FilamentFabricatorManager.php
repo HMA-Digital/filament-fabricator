@@ -61,7 +61,7 @@ class FilamentFabricatorManager
     /** @param  class-string  $layout */
     public function registerLayout(string $layout): void
     {
-        if (! is_subclass_of($layout, Layout::class)) {
+        if (!is_subclass_of($layout, Layout::class)) {
             throw new \InvalidArgumentException("{$layout} must extend " . Layout::class);
         }
 
@@ -71,7 +71,7 @@ class FilamentFabricatorManager
     /** @param  class-string  $pageBlock */
     public function registerPageBlock(string $pageBlock): void
     {
-        if (! is_subclass_of($pageBlock, PageBlock::class)) {
+        if (!is_subclass_of($pageBlock, PageBlock::class)) {
             throw new \InvalidArgumentException("{$pageBlock} must extend " . PageBlock::class);
         }
 
@@ -189,7 +189,7 @@ class FilamentFabricatorManager
         });
     }
 
-    public function getPageUrlFromId(int $id, bool $prefixSlash = false): ?string
+    public function getPageUrlFromId(string $id, bool $prefixSlash = false): ?string
     {
         $url = $this->getPageUrls()[$id];
 

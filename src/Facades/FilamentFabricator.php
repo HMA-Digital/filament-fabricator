@@ -28,7 +28,7 @@ use Z3d0X\FilamentFabricator\Models\Contracts\Page as PageContract;
  * @method static class-string<PageContract> getPageModel()
  * @method static string getRoutingPrefix()
  * @method static array getPageUrls()
- * @method static ?string getPageUrlFromId(int $id, bool $prefixSlash = false)
+ * @method static ?string getPageUrlFromId(string $id, bool $prefixSlash = false)
  *
  * @see \Z3d0X\FilamentFabricator\FilamentFabricatorManager
  */
