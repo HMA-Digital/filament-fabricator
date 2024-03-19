@@ -50,7 +50,7 @@ class FilamentFabricatorServiceProvider extends PackageServiceProvider
         foreach ($commands as $command) {
             $class = 'Z3d0X\\FilamentFabricator\\Commands\\Aliases\\' . class_basename($command);
 
-            if (! class_exists($class)) {
+            if (!class_exists($class)) {
                 continue;
             }
 
@@ -80,6 +80,10 @@ class FilamentFabricatorServiceProvider extends PackageServiceProvider
 
             $pageId = array_search($value, $pageUrls);
 
+            if (!Str::isUuid($pageId)) {
+                abort(404);
+            }
+
             return $pageModel::query()
                 ->where('id', $pageId)
                 ->firstOrFail();
@@ -108,7 +112,7 @@ class FilamentFabricatorServiceProvider extends PackageServiceProvider
 
         $filesystem = app(Filesystem::class);
 
-        if ((! $filesystem->exists($directory)) && (! Str::of($directory)->contains('*'))) {
+        if ((!$filesystem->exists($directory)) && (!Str::of($directory)->contains('*'))) {
             return;
         }
 
@@ -131,7 +135,7 @@ class FilamentFabricatorServiceProvider extends PackageServiceProvider
                         ->replace('*', $variableNamespace)
                         ->replace(['/', '.php'], ['\\', '']);
                 })
-                ->filter(fn (string $class): bool => is_subclass_of($class, $baseClass) && (! (new ReflectionClass($class))->isAbstract()))
+                ->filter(fn (string $class): bool => is_subclass_of($class, $baseClass) && (!(new ReflectionClass($class))->isAbstract()))
                 ->each(fn (string $class) => FilamentFabricator::registerComponent($class, $baseClass))
                 ->all(),
         );
